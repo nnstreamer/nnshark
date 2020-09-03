@@ -23,9 +23,11 @@ def parse_log_file():
     log_file = args.dir + "/log"
 
     with open(metadata_file, "r") as f:
-        ts = float(f.readline())
         for i in f.readlines():
-            element_name.append(i.split(" ")[1].split("\n")[0])
+            if len(i.split(" ")) > 1:
+                element_name.append(i.split(" ")[1].split("\n")[0])
+            else:
+                ts = float(i)
 
     for i in range(cpu_num):
         cpu_data.append([])
